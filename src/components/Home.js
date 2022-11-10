@@ -5,15 +5,43 @@ import Footer from "./Footer";
 
 function Home() {
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
+    <div className="flex flex-col items-center justify-center min-h-screen">
       <header className="flex w-full p-5 justify-between text-sm text-gray-700">
         <div className="flex space-x-4 items-center">
-          <p className="link">About</p>
-          <p className="link">Store</p>
+          <a
+            className="link"
+            href="https://www.google.com/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Home
+          </a>
+          <a
+            className="link"
+            href="https://chrome.google.com/webstore/category/extensions"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Store
+          </a>
         </div>
         <div className="flex space-x-4 items-center">
-          <p className="link">Gmail</p>
-          <p className="link">Images</p>
+          <a
+            className="link"
+            href="https://mail.google.com/mail/?authuser=0&ogbl"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Gmail
+          </a>
+          <a
+            className="link"
+            href="https://www.google.co.in/imghp?hl=en&authuser=0&ogbl"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Images
+          </a>
           <ViewGridIcon className="h-10 w-10 p-2 rounded-full hover:bg-gray-100 cursor-pointer" />
           <img
             loading="lazy"
@@ -23,7 +51,7 @@ function Home() {
           />
         </div>
       </header>
-      <form className="flex flex-col items-center mt-44 flex-grow w-4/5">
+      <form className="flex flex-col items-center justify-center my-5 flex-grow flex-1 w-4/5">
         <img
           src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
           alt="logo"
@@ -36,7 +64,15 @@ function Home() {
         </div>
         <div className="flex flex-col w-1/2 space-y-2 justify-center mt-8 sm:flex-row sm:space-x-4 sm:space-y-0">
           <button className="btn">Google Search</button>
-          <button className="btn">I'm Feeling Lucky</button>
+          <button className="btn">
+            <a
+              href="https://www.google.com/doodles"
+              target="_blank"
+              rel="noreferrer"
+            >
+              I'm Feeling Lucky
+            </a>
+          </button>
         </div>
         <div className="flex mt-6 items-center justify-center">
           <p className="pr-1 text-sm">Google offered in:</p>
