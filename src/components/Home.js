@@ -27,7 +27,7 @@ function Home({ profile, setProfile, onAuth }) {
             Home
           </a>
           <a
-            className="link"
+            className="link hidden sm:block"
             href="https://chrome.google.com/webstore/category/extensions"
             target="_blank"
             rel="noreferrer"
