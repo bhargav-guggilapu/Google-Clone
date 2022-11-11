@@ -15,7 +15,7 @@ import SearchResults from "./SearchResults";
 import { useHistory, useParams } from "react-router-dom";
 import { CogIcon, ViewGridIcon } from "@heroicons/react/outline";
 
-function Search() {
+function Search({ profile, setProfile, onAuth }) {
   const [inputValue, setInputValue] = useState("");
   const [index, setIndex] = useState(0);
   const [results, setResults] = useState([]);
@@ -113,12 +113,22 @@ function Search() {
           <div className="ml-auto flex justify-center items-center">
             <CogIcon className="h-10 hidden sm:block text-gray-500 p-2 mr-3 rounded-full hover:bg-gray-100 cursor-pointer" />
             <ViewGridIcon className="h-10 hidden sm:block text-gray-500 p-2 mr-3 rounded-full hover:bg-gray-100 cursor-pointer" />
-            <img
-              loading="lazy"
-              className="h-10 w-10 rounded-full cursor-pointer object-cover transition duration-150 transform hover:scale-110 "
-              src="https://images.unsplash.com/photo-1667788383721-8fa5975e363b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzOXx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60"
-              alt="profile"
-            />
+            {profile ? (
+              <img
+                loading="lazy"
+                className="h-10 w-10 rounded-full cursor-pointer object-cover transition duration-150 transform hover:scale-110 "
+                src={profile}
+                alt="profile"
+                onClick={() => setProfile("")}
+              />
+            ) : (
+              <div
+                className="text-white bg-[#1a73e8] cursor-pointer px-6 py-2 rounded-md hover:bg-[#005bd3]"
+                onClick={onAuth}
+              >
+                Sign in
+              </div>
+            )}
           </div>
         </div>
         <div className="flex w-full text-gray-700 justify-evenly text-sm lg:text-base lg:justify-start lg:space-x-56 lg:pl-56 border-b-[1px]">

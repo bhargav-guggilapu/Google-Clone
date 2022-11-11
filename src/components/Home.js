@@ -4,7 +4,7 @@ import { SearchIcon } from "@heroicons/react/outline";
 import Footer from "./Footer";
 import { useHistory } from "react-router-dom";
 
-function Home() {
+function Home({ profile, setProfile, onAuth }) {
   const [searchValue, setSearchValue] = useState("");
   const history = useHistory();
 
@@ -53,12 +53,22 @@ function Home() {
             Images
           </a>
           <ViewGridIcon className="h-10 w-10 p-2 rounded-full hover:bg-gray-100 cursor-pointer" />
-          <img
-            loading="lazy"
-            className="h-10 w-10 rounded-full cursor-pointer object-cover transition duration-150 transform hover:scale-110"
-            src="https://images.unsplash.com/photo-1667788383721-8fa5975e363b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzOXx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60"
-            alt="profile"
-          />
+          {profile ? (
+            <img
+              loading="lazy"
+              className="h-10 w-10 rounded-full cursor-pointer object-cover transition duration-150 transform hover:scale-110"
+              src={profile}
+              alt="profile"
+              onClick={() => setProfile("")}
+            />
+          ) : (
+            <div
+              className="text-white bg-[#1a73e8] cursor-pointer px-6 py-2 rounded-md hover:bg-[#005bd3]"
+              onClick={onAuth}
+            >
+              Sign in
+            </div>
+          )}
         </div>
       </header>
       <form className="flex flex-col items-center justify-center mb-5 flex-grow flex-1 w-4/5">
