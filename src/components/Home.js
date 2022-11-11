@@ -1,9 +1,19 @@
-import React from "react";
-import { MicrophoneIcon, ViewGridIcon } from "@heroicons/react/solid";
+import React, { useState } from "react";
+import { MicrophoneIcon, ViewGridIcon, XIcon } from "@heroicons/react/solid";
 import { SearchIcon } from "@heroicons/react/outline";
 import Footer from "./Footer";
+import { useHistory } from "react-router-dom";
 
 function Home() {
+  const [searchValue, setSearchValue] = useState("");
+  const history = useHistory();
+
+  const onSearch = (e) => {
+    e.preventDefault();
+    if (!searchValue) return;
+    history.push(`/tooble/search?query="${searchValue}"`);
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <header className="flex w-full p-5 justify-between text-sm text-gray-700">
@@ -51,19 +61,36 @@ function Home() {
           />
         </div>
       </header>
-      <form className="flex flex-col items-center justify-center my-5 flex-grow flex-1 w-4/5">
+      <form className="flex flex-col items-center justify-center mb-5 flex-grow flex-1 w-4/5">
         <img
+          loading="lazy"
           src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
           alt="logo"
-          className="h-24"
+          className="h-16 sm:h-24"
         />
         <div className="flex w-full mt-5 hover:shadow-lg focus-within:shadow-lg max-w-md rounded-full border border-gray-200 px-5 py-3 items-center sm:max-w-xl lg:max-w-2xl transition duration-150">
           <SearchIcon className="h-5 mr-3 text-gray-500" />
-          <input type="text" className="flex-grow focus:outline-none" />
-          <MicrophoneIcon className="h-5 text-gray-500 cursor-pointer" />
+          <input
+            type="text"
+            className="flex-grow focus:outline-none"
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+          />
+          <div className={`${searchValue && "border-r-2"}`}>
+            <XIcon
+              className={`h-5 sm:mr-3 text-gray-500 cursor-pointer transition duration-100 transform hover:scale-125 ${
+                !searchValue && "invisible"
+              }`}
+              onClick={() => setSearchValue("")}
+            />
+          </div>
+
+          <MicrophoneIcon className="h-5 text-blue-500 cursor-pointer pl-3" />
         </div>
-        <div className="flex flex-col w-1/2 space-y-2 justify-center mt-8 sm:flex-row sm:space-x-4 sm:space-y-0">
-          <button className="btn">Google Search</button>
+        <div className="flex justify-center mt-8 space-x-4">
+          <button type="submit" className="btn" onClick={onSearch}>
+            Google Search
+          </button>
           <button className="btn">
             <a
               href="https://www.google.com/doodles"
@@ -74,9 +101,9 @@ function Home() {
             </a>
           </button>
         </div>
-        <div className="flex mt-6 items-center justify-center">
-          <p className="pr-1 text-sm">Google offered in:</p>
-          <div className="flex flex-wrap">
+        <div className="flex mt-6 items-center justify-center flex-col sm:flex-row">
+          <p className="pr-1 text-sm pb-3 sm:pb-0">Google offered in:</p>
+          <div className="flex">
             <p className="anchor">हिन्दी</p>
             <p className="anchor">বাংলা</p>
             <p className="anchor">తెలుగు</p>
