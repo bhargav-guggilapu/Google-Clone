@@ -122,12 +122,13 @@ function Search({ profile, setProfile, onAuth }) {
                 onClick={() => setProfile("")}
               />
             ) : (
-              <div
-                className="text-white bg-[#1a73e8] cursor-pointer px-6 py-2 rounded-md hover:bg-[#005bd3]"
+              <img
+                loading="lazy"
+                className="h-10 w-10 rounded-full cursor-pointer object-cover transition duration-150 transform hover:scale-110 "
+                src="https://cdn.pixabay.com/photo/2021/07/02/04/48/user-6380868__480.png"
+                alt="profile"
                 onClick={onAuth}
-              >
-                Sign in
-              </div>
+              />
             )}
           </div>
         </div>
