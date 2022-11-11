@@ -9,7 +9,7 @@ function App() {
         <Route path="/tooble" exact>
           <Home />
         </Route>
-        <Route path="/tooble/search" exact>
+        <Route path="/tooble/search/:query/:index" exact>
           <Search />
         </Route>
         <Route path="*">

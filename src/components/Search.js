@@ -8,20 +8,41 @@ import {
   SearchIcon,
   XIcon,
 } from "@heroicons/react/solid";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchResults from "./SearchResults";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { CogIcon, ViewGridIcon } from "@heroicons/react/outline";
+import Response from "./Response";
 
 function Search() {
   const [inputValue, setInputValue] = useState("");
+  const [index, setIndex] = useState(1);
+  const [results, setResults] = useState([]);
   const history = useHistory();
+  const params = useParams();
+
+  useEffect(() => {
+    setInputValue(params.query);
+    setIndex(params.index);
+    searchData(params.query, params.index);
+  }, [params.query, params.index]);
+
+  const searchData = async (value, index) => {
+    const response = await fetch(
+      `https://www.googleapis.com/customsearch/v1?key=AIzaSyCbNBXRrRCCINjkQ6pbbri9S5Ur3GhmVto&cx=104b02e0506524e9e&q=${
+        value
+      }&start=${index}`
+    );
+    const data = await response.json();
+    // const data = Response;
+    setResults(data);
+  };
 
   const onSearch = (e) => {
     e.preventDefault();
 
     if (!inputValue) return;
-    history.push(`/tooble/search?query="${inputValue}"`);
+    history.push(`/tooble/search/${inputValue}/${index}`);
   };
 
   const headerOptions = [
@@ -101,9 +122,10 @@ function Search() {
         </div>
         <div className="flex w-full text-gray-700 justify-evenly text-sm lg:text-base lg:justify-start lg:space-x-56 lg:pl-56 border-b-[1px]">
           <div className="flex space-x-6">
-            {headerOptions.map((option) => {
+            {headerOptions.map((option, i) => {
               return (
                 <div
+                  key={i}
                   className={`flex items-center space-x-1 border-b-4 border-transparent hover:text-blue-500 hover:border-blue-500 pb-3 cursor-pointer ${
                     option.selected && "text-blue-500 border-blue-500"
                   }`}
@@ -117,7 +139,7 @@ function Search() {
           <p className="link">Tools</p>
         </div>
       </header>
-      <SearchResults />
+      <SearchResults results={results} />
     </div>
   );
 }
