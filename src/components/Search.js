@@ -7,6 +7,8 @@ import {
   PlayIcon,
   SearchIcon,
   XIcon,
+  ArrowCircleLeftIcon,
+  ArrowCircleRightIcon,
 } from "@heroicons/react/solid";
 import React, { useEffect, useState } from "react";
 import SearchResults from "./SearchResults";
@@ -16,22 +18,22 @@ import Response from "./Response";
 
 function Search() {
   const [inputValue, setInputValue] = useState("");
-  const [index, setIndex] = useState(1);
+  const [index, setIndex] = useState(0);
   const [results, setResults] = useState([]);
   const history = useHistory();
   const params = useParams();
 
   useEffect(() => {
     setInputValue(params.query);
-    setIndex(params.index);
+    setIndex(+params.index);
     searchData(params.query, params.index);
   }, [params.query, params.index]);
 
-  const searchData = async (value, index) => {
+  const searchData = async (value, start) => {
     const response = await fetch(
       `https://www.googleapis.com/customsearch/v1?key=AIzaSyCbNBXRrRCCINjkQ6pbbri9S5Ur3GhmVto&cx=104b02e0506524e9e&q=${
         value
-      }&start=${index}`
+      }&start=${start*10}`
     );
     const data = await response.json();
     // const data = Response;
@@ -42,7 +44,8 @@ function Search() {
     e.preventDefault();
 
     if (!inputValue) return;
-    history.push(`/tooble/search/${inputValue}/${index}`);
+    setIndex(0);
+    history.push(`/tooble/search/${inputValue}/0`);
   };
 
   const headerOptions = [
@@ -140,6 +143,34 @@ function Search() {
         </div>
       </header>
       <SearchResults results={results} />
+      <div className="flex justify-evenly items-center max-w-xl mb-8 ml-0 lg:ml-48 sm:ml-20">
+        {index > 0 && (
+          <div className="cursor-pointer flex flex-col justify-center items-center hover:underline">
+            <ArrowCircleLeftIcon
+              className="h-8"
+              onClick={() =>
+                history.push(`/tooble/search/${inputValue}/${index - 1}`)
+              }
+            />
+            <p>Previous</p>
+          </div>
+        )}
+        {index > 0 && (
+          <p className="text-lg">
+            {"Page: "}
+            <span className="font-semibold">{index}</span>
+          </p>
+        )}
+        <div
+          onClick={() =>
+            history.push(`/tooble/search/${inputValue}/${index + 1}`)
+          }
+          className="cursor-pointer flex flex-col justify-center items-center hover:underline"
+        >
+          <ArrowCircleRightIcon className="h-8" />
+          <p>Next</p>
+        </div>
+      </div>
     </div>
   );
 }

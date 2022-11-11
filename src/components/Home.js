@@ -11,7 +11,7 @@ function Home() {
   const onSearch = (e) => {
     e.preventDefault();
     if (!searchValue) return;
-    history.push(`/tooble/search/${searchValue}/1`);
+    history.push(`/tooble/search/${searchValue}/0`);
   };
 
   return (

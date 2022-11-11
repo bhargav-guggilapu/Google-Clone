@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/tooble/static/css/main.9b3c9d7c.css",
-    "main.js": "/tooble/static/js/main.ca079565.js",
+    "main.css": "/tooble/static/css/main.89008d63.css",
+    "main.js": "/tooble/static/js/main.b45a5054.js",
     "static/js/787.079348d1.chunk.js": "/tooble/static/js/787.079348d1.chunk.js",
     "index.html": "/tooble/index.html",
-    "main.9b3c9d7c.css.map": "/tooble/static/css/main.9b3c9d7c.css.map",
-    "main.ca079565.js.map": "/tooble/static/js/main.ca079565.js.map",
+    "main.89008d63.css.map": "/tooble/static/css/main.89008d63.css.map",
+    "main.b45a5054.js.map": "/tooble/static/js/main.b45a5054.js.map",
     "787.079348d1.chunk.js.map": "/tooble/static/js/787.079348d1.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9b3c9d7c.css",
-    "static/js/main.ca079565.js"
+    "static/css/main.89008d63.css",
+    "static/js/main.b45a5054.js"
   ]
 }
