@@ -14,7 +14,6 @@ import React, { useEffect, useState } from "react";
 import SearchResults from "./SearchResults";
 import { useHistory, useParams } from "react-router-dom";
 import { CogIcon, ViewGridIcon } from "@heroicons/react/outline";
-import Response from "./Response";
 
 function Search() {
   const [inputValue, setInputValue] = useState("");
@@ -31,12 +30,11 @@ function Search() {
 
   const searchData = async (value, start) => {
     const response = await fetch(
-      `https://www.googleapis.com/customsearch/v1?key=AIzaSyCbNBXRrRCCINjkQ6pbbri9S5Ur3GhmVto&cx=104b02e0506524e9e&q=${
-        value
-      }&start=${start*10}`
+      `https://www.googleapis.com/customsearch/v1?key=AIzaSyCbNBXRrRCCINjkQ6pbbri9S5Ur3GhmVto&cx=104b02e0506524e9e&q=${value}&start=${
+        start * 10
+      }`
     );
     const data = await response.json();
-    // const data = Response;
     setResults(data);
   };
 
@@ -84,15 +82,15 @@ function Search() {
   return (
     <div>
       <header className="sticky top-0 bg-white">
-        <div className="flex w-full p-6 pl-20 items-center">
+        <div className="flex w-full p-6 sm:pl-20 items-center">
           <img
             loading="lazy"
             src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
             alt="logo"
-            className="h-8 cursor-pointer"
+            className="h-8 hidden sm:block cursor-pointer"
             onClick={() => history.push("/tooble")}
           />
-          <form className="flex flex-grow px-6 py-3 ml-10 mr-5 border border-gray-200 rounded-full shadow-lg hover:shadow-xl max-w-3xl items-center">
+          <form className="flex flex-grow px-6 py-3 sm:ml-10 mr-5 border border-gray-200 rounded-full shadow-lg hover:shadow-xl max-w-3xl items-center">
             <input
               type="text"
               placeholder="Search..."
@@ -100,7 +98,7 @@ function Search() {
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
             />
-            <div className={`${inputValue && "border-r-2"}`}>
+            <div className={`${inputValue && "sm:border-r-2"}`}>
               <XIcon
                 className={`h-6 sm:mr-3 text-gray-500 cursor-pointer transition duration-100 transform hover:scale-125 ${
                   !inputValue && "invisible"
@@ -113,8 +111,8 @@ function Search() {
             <button hidden type="submit" onClick={onSearch} />
           </form>
           <div className="ml-auto flex justify-center items-center">
-            <CogIcon className="h-10 text-gray-500 p-2 mr-3 rounded-full hover:bg-gray-100 cursor-pointer" />
-            <ViewGridIcon className="h-10 text-gray-500 p-2 mr-3 rounded-full hover:bg-gray-100 cursor-pointer" />
+            <CogIcon className="h-10 hidden sm:block text-gray-500 p-2 mr-3 rounded-full hover:bg-gray-100 cursor-pointer" />
+            <ViewGridIcon className="h-10 hidden sm:block text-gray-500 p-2 mr-3 rounded-full hover:bg-gray-100 cursor-pointer" />
             <img
               loading="lazy"
               className="h-10 w-10 rounded-full cursor-pointer object-cover transition duration-150 transform hover:scale-110 "
@@ -143,7 +141,11 @@ function Search() {
         </div>
       </header>
       <SearchResults results={results} />
-      <div className="flex justify-evenly items-center max-w-xl mb-8 ml-0 lg:ml-48 sm:ml-20">
+      <div
+        className={`flex justify-evenly items-center max-w-xl mb-8 ml-0 lg:ml-48 sm:ml-20 ${
+          results.length === 0 && "hidden"
+        }`}
+      >
         {index > 0 && (
           <div className="cursor-pointer flex flex-col justify-center items-center hover:underline">
             <ArrowCircleLeftIcon
