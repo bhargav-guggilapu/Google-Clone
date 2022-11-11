@@ -2,6 +2,6 @@
 
 Google Clone
 
-Developed using REACT with REDUX and also included ROUTING
+Developed using REACT and included ROUTING
 
 LINK TO PAGE --> https://bhargav-guggilapu.github.io/tooble/
