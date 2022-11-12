@@ -171,7 +171,7 @@ function Search({ profile, setProfile, onAuth }) {
         {index > 0 && (
           <p className="text-lg">
             {"Page: "}
-            <span className="font-semibold">{index}</span>
+            <span className="font-semibold">{index + 1}</span>
           </p>
         )}
         <div
