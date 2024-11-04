@@ -1,6 +1,4 @@
-# tooble
-
-Google Clone
+# Google Clone
 
 Developed using REACT and included ROUTING
 
